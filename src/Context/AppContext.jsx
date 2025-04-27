@@ -12,11 +12,11 @@
 // export const useAppContext=()=>{
 //     return useContext(AppContext)
 // }
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { dummyProducts } from "../assets/assets";
 import toast from "react-hot-toast";
-import { useEffect } from "react";
+
 
 
 export const AppContext = createContext();
@@ -26,7 +26,7 @@ export const AppContextProvider = ({ children }) => {
 const currency=import.meta.VITE_CURRENCY;
 
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(false);
   const [isSeller, setIsSeller] = useState(false);
   const [showUserLogin, setShowUserLogin] = useState(false);
 const[products,setProducts]=useState([])
