@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home';
 import { useLocation } from 'react-router-dom';
 import {Toaster} from "react-hot-toast";
+import Footer from './Components/Footer';
 
 const App = () => {
   const IsSellerPath = useLocation().pathname.includes("seller");
@@ -16,6 +17,7 @@ const App = () => {
         <Route path='/' element={<Home/>}/>
       </Routes>
       </div>
+      {!IsSellerPath && <Footer/>}
     </div>
   )
 }
