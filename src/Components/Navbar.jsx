@@ -6,11 +6,12 @@ import searchIcon from '../assets/search_icon.svg';
 import navCartIcon from '../assets/nav_cart_icon.svg';
 import menuIcon from '../assets/menu_icon.svg';
 import profile_icon from '../assets/profile_icon.png';
+import { assets } from '../assets/assets';
 
 
 const Navbar = () => {
     const [open, setOpen] = React.useState(false)
-    const {user,setUser,setShowUserLogin,navigate, searchQuery, setSearchQuery}=useAppContext();
+    const {user,setUser,setShowUserLogin,navigate, searchQuery, setSearchQuery,getCartCount}=useAppContext();
 
 const logout=async()=>{
     setUser(null);
@@ -42,11 +43,13 @@ if(searchQuery.length > 0){
             <img src={searchIcon} alt='search' className='w-4v h-4'/>
 
         </div>
+<div>
 
+</div>
         <div onClick={()=>navigate("/cart")} className="relative cursor-pointer">
 <img src={navCartIcon} alt='cart' className='w-6 opacity-80'/>
            
-            <button className="absolute -top-2 -right-3 text-xs text-white bg-primary w-[18px] h-[18px] rounded-full">3</button>
+            <button className="absolute -top-2 -right-3 text-xs text-white bg-[var(--color-primary)] w-[18px] h-[18px] rounded-full">{getCartCount()}</button>
         </div>
 
         {!user ?(<button onClick={()=>setShowUserLogin(true)} className="cursor-pointer px-8 py-2 bg-[var(--color-primary)]  hover:bg-[var(--color-primary-dull)] transition text-white rounded-full">
@@ -61,12 +64,21 @@ if(searchQuery.length > 0){
                 </ul>
             </div>
         )}
+    </div>  
+    <div className='flex items-center gap-6 sm:hidden'>
+    <div onClick={()=>navigate("/cart")} className="relative cursor-pointer">
+<img src={navCartIcon} alt='cart' className='w-6 opacity-80'/>
+           
+            <button className="absolute -top-2 -right-3 text-xs text-white bg-[var(--color-primary)] w-[18px] h-[18px] rounded-full">{getCartCount()}</button>
+        </div>
+
+    <button onClick={() => open ? setOpen(false): setOpen(true)} aria-label="Menu" className="">
+    <img src={menuIcon} alt='menu' />
+    </button>
     </div>
 
-    <button onClick={() => open ? setOpen(false) : setOpen(true)} aria-label="Menu" className="sm:hidden">
-        {/* Menu Icon SVG */}
-        <img src={menuIcon} alt="menu" />
-    </button>
+    
+
 
     {/* Mobile Menu */}
     { open && (

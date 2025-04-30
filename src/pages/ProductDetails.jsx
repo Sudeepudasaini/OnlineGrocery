@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { assets } from "../assets/assets";
 import StarIcon from '../assets/star_icon.svg';
 import StarDullIcon from '../assets/star_dull_icon.svg';
+import ProductCard from "../Components/ProductCard";
 
 
 const ProductDetails = () => {
@@ -34,7 +35,7 @@ setThumbnail(product?.image[0] ? product.image[0]: null)
                 <Link to={"/"}>Home</Link> /
                 <Link to={"/products"}> Products</Link> /
                 <Link to={`/products/${product.category.toLowerCase()}`}> {product.category}</Link> /
-                <span className="text-indigo-500"> {product.name}</span>
+                <span className="text-[var(--color-primary)]"> {product.name}</span>
             </p>
 
             <div className="flex flex-col md:flex-row gap-16 mt-4">
@@ -80,12 +81,28 @@ setThumbnail(product?.image[0] ? product.image[0]: null)
                         <button onClick={()=> addToCart(product._id)} className="w-full py-3.5 cursor-pointer font-medium bg-gray-100 text-gray-800/80 hover:bg-gray-200 transition" >
                             Add to Cart
                         </button>
-                        <button onClick={()=> {addToCart(product._id); navigate("/cart")}} className="w-full py-3.5 cursor-pointer font-medium bg-indigo-500 text-white hover:bg-indigo-600 transition" >
+                        <button onClick={()=> {addToCart(product._id); navigate("/cart")}} className="w-full py-3.5 cursor-pointer font-medium bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-dull)] transition" >
                             Buy now
                         </button>
                     </div>
                 </div>
             </div>
+          {/* related products */}
+            <div className="flex flex-col items-center mt-20">
+                <div className="flex flex-col items-center w-max">
+                    <p className="text-3xl font-medium">Related Products</p>
+                    <div className="w-20 h-0.5 bg-[var(--color-primary)] rounded-full mt-2"></div>
+                        
+                    </div>
+<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-6 lg:grid-cols-5 mt-6 w-full">
+{relatedProducts.filter((product)=>product.inStock).map((product,index)=>(
+    <ProductCard key={index} product={product} />
+    ))}
+
+    </div>
+<button onClick={()=>{navigate('/products'); scrollTo(0,0)}} className="mx-auto cursor-pointer px-12 my-16 py-2.5 border rounded text-[var(--color-primary)] hover:bg-[rgb(var(--color-primary-rgb)/0.1)] transition">See More</button>
+
+                </div>
         </div>
     );
 };
