@@ -69,7 +69,7 @@ return products.length > 0 && cartItems ? (
                             </div>
                         </div>
                         <p className="text-center">{currency}{product.offerPrice * product.quantity}</p>
-                        <button onClick={()=>removeFromCart()} className="cursor-pointer mx-auto">
+                        <button onClick={()=>removeFromCart(product._id)} className="cursor-pointer mx-auto">
                          <img src={assets.refresh_icon} alt="remove"
                          className="inline-block w-6 h-6" />   
                         </button>
