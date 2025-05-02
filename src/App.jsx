@@ -15,6 +15,10 @@ import AddAddress from './pages/AddAddress';
 import MyOrders from './pages/MyOrders';
 import SellerLogin from './Components/seller/SellerLogin';
 
+
+
+
+
 const App = () => {
   const IsSellerPath = useLocation().pathname.includes("seller");
   const {showUserLogin,isSeller}=useAppContext()
@@ -34,6 +38,8 @@ const App = () => {
         <Route path='/add-address' element={<AddAddress/>}/>
         <Route path='/my-orders' element={<MyOrders/>}/>
 <Route path='/seller'element={isSeller ? <SellerLayout/> : <SellerLogin/>}>
+
+  
 
 </Route>
         {/* <Route path="/products/:id" element={<ProductDetails />} /> */}
