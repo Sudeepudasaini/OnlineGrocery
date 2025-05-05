@@ -14,6 +14,10 @@ import Cart from './pages/Cart';
 import AddAddress from './pages/AddAddress';
 import MyOrders from './pages/MyOrders';
 import SellerLogin from './Components/seller/SellerLogin';
+import SellerLayout from './pages/seller/SellerLayout';
+import AddProduct from './pages/seller/AddProduct';
+import ProductList from './pages/seller/ProductList';
+import Orders from './pages/seller/Orders';
 
 
 
@@ -39,7 +43,9 @@ const App = () => {
         <Route path='/my-orders' element={<MyOrders/>}/>
 <Route path='/seller'element={isSeller ? <SellerLayout/> : <SellerLogin/>}>
 
-  
+  <Route index element={isSeller ? <AddProduct/> : null} />
+  <Route path ='product-list' element={<ProductList/>} />
+  <Route path ='orders' element={<Orders/>} />
 
 </Route>
         {/* <Route path="/products/:id" element={<ProductDetails />} /> */}

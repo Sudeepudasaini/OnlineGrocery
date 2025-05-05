@@ -21,3 +21,7 @@
   --color-primary-dull: #44ae7c;
   --color-primary-rgb: 79 191 139;
 }
+
+.no-scrollbar::-webkit-scrollbar{
+  display: none;
+}
