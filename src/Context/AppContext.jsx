@@ -38,6 +38,22 @@ const[cartItems,setCartItems]=useState({})
 const[searchQuery,setSearchQuery]=useState({})
 
 
+//fetch seller status
+const fetchSeller = async ()=>{
+  try {
+    const {data} = await axios.get('/api/seller/is-auth');
+if(data.success){
+  setIsSeller(true)
+}else{
+  setIsSeller(false)
+}
+
+  } catch (error) {
+    
+  }
+}
+
+
 //fetch all products
 const fetchProducts= async()=>{
   setProducts(dummyProducts)
@@ -61,7 +77,9 @@ const updateCartItem=(itemId,quantity)=>{
   toast.success("Cart Updated")
 }
 useEffect(()=>{
+  fetchSeller()
   fetchProducts()
+ 
 },[])
 
 //Remove Product From Cart
