@@ -56,7 +56,20 @@ if(data.success){
 
 //fetch all products
 const fetchProducts= async()=>{
-  setProducts(dummyProducts)
+  try {
+    const {data} = await axios.get('/api/product/list')
+    if(data.success){
+      setProducts(data.products)
+    }else{
+      toast.error(data.message)
+    }
+  } catch (error) {
+    toast.error(data.message)
+
+  }
+
+
+
 }
 //Add product to cart
 const addToCart=(itemId)=>{
