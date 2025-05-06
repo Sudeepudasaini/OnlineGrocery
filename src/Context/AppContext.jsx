@@ -49,10 +49,22 @@ if(data.success){
 }
 
   } catch (error) {
-    
+    setIsSeller(false)
   }
 }
 
+//fetch user Auth status, User Data and Cart Items
+const fetchUser = async()=>{
+  try {
+    const {data} = await axios.get('api/user/is-auth');
+    if(data.success){
+      setUser(data.user)
+      setCartItems(data.user.cartItems)
+    }
+  } catch (error) {
+    setUser(null)
+  }
+}
 
 //fetch all products
 const fetchProducts= async()=>{
@@ -90,10 +102,32 @@ const updateCartItem=(itemId,quantity)=>{
   toast.success("Cart Updated")
 }
 useEffect(()=>{
+  fetchUser()
   fetchSeller()
   fetchProducts()
  
 },[])
+
+
+//updated Database Cart items
+useEffect(()=>{
+const updateCart = async ()=>{
+  try {
+    const {data} = await axios.post('/api/cart/update', { userId: user._id, cartItems})
+    if(!data.success){
+      toast.error(data.message)
+    }
+  } catch (error) {
+ toast.error(error.message)   
+  }
+}
+if(user){
+  updateCart()
+}
+
+},[cartItems])
+
+
 
 //Remove Product From Cart
 const removeFromCart=(itemId)=>{

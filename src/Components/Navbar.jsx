@@ -7,15 +7,27 @@ import navCartIcon from '../assets/nav_cart_icon.svg';
 import menuIcon from '../assets/menu_icon.svg';
 import profile_icon from '../assets/profile_icon.png';
 import { assets } from '../assets/assets';
+import toast from 'react-hot-toast';
 
 
 const Navbar = () => {
     const [open, setOpen] = React.useState(false)
-    const {user,setUser,setShowUserLogin,navigate, searchQuery, setSearchQuery,getCartCount}=useAppContext();
+    const {user,setUser,setShowUserLogin,navigate, searchQuery, setSearchQuery,getCartCount, axios}=useAppContext();
 
 const logout=async()=>{
-    setUser(null);
-    navigate('/')
+    try {
+        const {data} = await axios.get('/api/user/logout')
+        if(data.success){
+            toast.success(data.message)
+            setUser(null);
+            navigate('/')
+        }else{
+            toast.error(data.message)
+        }
+    } catch (error) {
+        toast.error(error.message)
+    }
+   
 }
 
 useEffect(()=>{
@@ -27,7 +39,7 @@ if(searchQuery.length > 0){
   return (
     <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
 
-    <NavLink to='/' on onClick={()=>setOpen(false)}>
+    <NavLink to='/'  onClick={()=>setOpen(false)}>
     
 <img className="h-20" src={logo1} alt="logo1" />
         </NavLink>

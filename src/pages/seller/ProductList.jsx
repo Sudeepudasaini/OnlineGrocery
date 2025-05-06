@@ -12,7 +12,7 @@ const toggleStock = async(id, inStock)=>{
         fetchProducts();
         toast.success(data.message)
     }else{
-        toast.error(error.message)
+        toast.error(data.message)
     }
     
     } catch (error) {
