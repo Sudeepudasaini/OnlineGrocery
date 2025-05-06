@@ -2,7 +2,22 @@ import React from 'react'
 import { useAppContext } from '../../Context/AppContext'
 
 const ProductList = () => {
-    const {products, currency} =useAppContext()
+    const {products, currency, axios, fetchProducts} =useAppContext()
+
+const toggleStock = async(id, inStock)=>{
+    try {
+        const {data} = await axios.post('/api/product/stock', {id, inStock}) 
+    if(data.success){
+        fetchProducts();
+        toast.success(data.message)
+    }else{
+        toast.error(data.message)
+    }
+    
+    } catch (error) {
+toast.error(data.message)        
+    }
+}
 
   return (
     <div className="fno-scrollbar flex-1 h-[95vh] overflow-y-scroll flex flex-col justify between">

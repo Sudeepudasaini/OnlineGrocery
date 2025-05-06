@@ -128,7 +128,7 @@ const getCartAmount=()=>{
   return Math.floor(totalAmount * 100)/100;
 }
 
-  const value = { navigate, user, setUser, isSeller, setIsSeller,showUserLogin,setShowUserLogin,products ,currency, addToCart,updateCartItem, removeFromCart,cartItems,searchQuery,setSearchQuery,getCartAmount,getCartCount, axios
+  const value = { navigate, user, setUser, isSeller, setIsSeller,showUserLogin,setShowUserLogin,products ,currency, addToCart,updateCartItem, removeFromCart,cartItems,searchQuery,setSearchQuery,getCartAmount,getCartCount, axios, fetchProducts
 
   }
 
